@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="menu_add_fav" type="id" />
+    <item name="menu_clear_fav" type="id" />
+    <item name="tv_id_barang" type="id" />
+    <item name="tv_lensa" type="id" />
+    <item name="menu_logout" type="id" />
+</resources>

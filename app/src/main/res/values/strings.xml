@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">Optik Data</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_about">About</string>
+    <string name="cart">Cart</string>
+    <string name="checkout">Checkout</string>
+    <string name="add_to_cart">Add To Cart</string>
+    <string name="search_id">Cari</string>
+    <string name="str_hint_search">Cari ID Product</string>
+
+
+    <string name="title_nama">Nama : Aries</string>
+    <string name="title_nim">NIM : 10118448</string>
+    <string name="title_jurusan">Jurusan : Manajmen Informasi</string>
+    <string name="about_me">Membuat Tugas Penulisan Ilmiah Toko Optik Lensa \n Berbasis Android Dengan SQLite</string>
+    <string name="save_catalog">Simpan</string>
+    <string name="select_product_image">Upload Image</string>
+    <string name="str_harga">Masukan Harga</string>
+    <string name="nama_barang">Nama Barang</string>
+    <string name="str_idbarang">ID Barang</string>
+    <string name="logout">Logout</string>
+    <string name="title_admin">Admin</string>
+    <string name="add_product">Tambah Product Database</string>
+    <string name="ukuran">Ukuran Lensa</string>
+    <string name="lens">Lensa +/-</string>
+</resources>
