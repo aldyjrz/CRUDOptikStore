@@ -45,6 +45,10 @@ public class MainActivity extends AppCompatActivity {
     private String idx, namax, lensax;
     private Integer hargax;
     String ukuranx;
+    private DAO_Product db;
+
+    Button addcart,cart, btn_cari;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,78 +56,75 @@ public class MainActivity extends AppCompatActivity {
        app = AppController.obtainApp(this);
        app.addActivity(this);
 
-        initAllres();
         SessionUser user = new SessionUser(getApplicationContext());
         if(user.isLoggedIn()){
             startActivity(new Intent(getApplicationContext(), LoginActivity.class));
-        }
+        }else {
+             EditText et_cari = (EditText)findViewById(R.id.et_cari);
+            btn_cari = (Button) findViewById(R.id.cari);
+            cart = (Button)findViewById(R.id.btn_add);
+             final TextView id, nama, harga, ukuran, lensa;
+            id = (TextView)findViewById(R.id.tv_product_id);
+            nama = (TextView)findViewById(R.id.tv_product_name);
+            harga = (TextView)findViewById(R.id.tv_product_price);
+            ukuran = (TextView)findViewById(R.id.tv_product_size);
+            lensa = (TextView)findViewById(R.id.tv_product_lensa);
 
-        mTextMessage = (TextView) findViewById(R.id.message);
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-    }
+            mTextMessage = (TextView) findViewById(R.id.message);
+            BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+            navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
+            cart.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(getApplicationContext(), ProductAdd.class));
+                }
+            });
 
-    Button addcart,cart, btn_cari;
-    public void initAllres(){
-        //EditText
-        final EditText et_cari = (EditText)findViewById(R.id.et_cari);
-        btn_cari = (Button) findViewById(R.id.cari);
-        cart = (Button)findViewById(R.id.btn_add);
-        final TextView id, nama, harga, ukuran, lensa;
-        id = (TextView)findViewById(R.id.tv_product_id);
-        nama = (TextView)findViewById(R.id.tv_product_name);
-        harga = (TextView)findViewById(R.id.tv_product_price);
-        ukuran = (TextView)findViewById(R.id.tv_product_size);
-        lensa = (TextView)findViewById(R.id.tv_product_lensa);
+            btn_cari.setOnClickListener(new View.OnClickListener() {
 
-        cart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), ProductAdd.class));
-            }
-        });
-        btn_cari.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    idx = id.getText().toString();
+                    namax = nama.getText().toString();
+                    hargax = Integer.valueOf(harga.getText().toString());
+                    ukuranx = ukuran.getText().toString();
+                    lensax = lensa.getText().toString();
 
-            @Override
-            public void onClick(View v) {
+                    if(idx.isEmpty()){
+                        Toast.makeText(getApplicationContext(), "ID Product Belum Di Isi", Toast.LENGTH_SHORT).show();
+                        return;
+                    }else{
 
-                idx = id.getText().toString();
-                namax = nama.getText().toString();
-                hargax = Integer.valueOf(harga.getText().toString());
-                ukuranx = ukuran.getText().toString();
-                lensax = lensa.getText().toString();
-              if(idx.isEmpty()){
-                  Toast.makeText(getApplicationContext(), "ID Product Belum Di Isi", Toast.LENGTH_SHORT).show();
-              }else{
+                        SQLiteDBFavHelper dbFavHelper = new SQLiteDBFavHelper(app);
+                        Cursor res = dbFavHelper.rawQuery("select * from product", null);
+                        while (res.moveToNext()) {
 
+                            idx = res.getString(1);
+                            namax = res.getString(2);
+                            hargax = res.getInt(3);
+                            ukuranx = res.getString(4);
+                            lensax = res.getString(5);
+                            Toast.makeText(getApplicationContext(), idx, Toast.LENGTH_SHORT).show();
 
-                  dbFavHelper = AppController.obtainApp(getApplicationContext()).dbHelper;
-                  Cursor res = dbFavHelper.rawQuery("select * from product", null);
-                  while (res.moveToNext()) {
-
-                      idx = res.getString(0);
-                      namax = res.getString(1);
-                      hargax = res.getInt(2);
-                      ukuranx = res.getString(3);
-                      lensax = res.getString(4);
-                      Toast.makeText(getApplicationContext(), idx, Toast.LENGTH_SHORT).show();
-
-                  }
-              }
-                addcart.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-
-                        if(idx.isEmpty()){
-                            Toast.makeText(getApplicationContext(), "Barang Kosong", Toast.LENGTH_SHORT).show();
                         }
-                        DAO_Product.addProd(getApplicationContext(), idx, namax, hargax, ukuranx, lensax);
                     }
-                });
-              }
+                    addcart.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
 
-        });
+                            if(idx.isEmpty()){
+                                Toast.makeText(getApplicationContext(), "Barang Kosong", Toast.LENGTH_SHORT).show();
+                            }
+                            DAO_Product.addProd(getApplicationContext(), idx, namax, hargax, ukuranx, lensax);
+                        }
+                    });
+                }
 
+            });
+
+        }
     }
+
+
 }

@@ -25,13 +25,12 @@ public class ProductAdd
     super.onCreate(savedInstanceState);
 
     setContentView(R.layout.add_product);
-
-    id = (EditText)findViewById(R.id.idbarang);
-    nama = (EditText)findViewById(R.id.namabarang);
-    harga = (EditText)findViewById(R.id.hargabarang);
-    ukuran = (EditText)findViewById(R.id.ukuran);
-    mins = (EditText)findViewById(R.id.lens);
-    save = (Button)findViewById(R.id.btn_simpan);
+    id = findViewById(R.id.idbarang);
+    nama = findViewById(R.id.namabarang);
+    harga = findViewById(R.id.hargabarang);
+    ukuran = findViewById(R.id.ukuran);
+    mins = findViewById(R.id.lens);
+    save = findViewById(R.id.btn_simpan);
 
     save.setOnClickListener(new View.OnClickListener() {
       @Override
@@ -43,13 +42,13 @@ public class ProductAdd
         final String minss;
         ids = id.getText().toString();
         namas = nama.getText().toString();
-        hargas = Integer.valueOf(harga.getText().toString());
+        hargas = Integer.parseInt(harga.getText().toString());
         ukurans = ukuran.getText().toString();
         minss = mins.getText().toString();
 
         if(!ids.isEmpty() && !namas.isEmpty() &&  !minss.isEmpty()) {
-          DAO_Product.addProd(getApplicationContext(), ids, namas, hargas, ukurans, minss);
-        }else{
+               DAO_Product.addProd(getApplicationContext(), ids, namas, hargas, ukurans, minss);
+        }else  if(ids.isEmpty() && namas.isEmpty() && minss.isEmpty() && hargas == 0 && ukurans.isEmpty()) {
           Toast.makeText(getApplicationContext(), "Harap isi semua field", Toast.LENGTH_SHORT).show();
         }
       }

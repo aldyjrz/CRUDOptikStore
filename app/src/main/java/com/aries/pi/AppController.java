@@ -17,7 +17,6 @@ import java.util.LinkedList;
 public class AppController extends Application {
 
 
-    SQLiteDBFavHelper SQLiteDBFavHelper;
     public String id;
     public String nama_barang;
     public Double harga_barang;
@@ -42,6 +41,7 @@ public class AppController extends Application {
     public void onCreate() {
         super.onCreate();
         mInstance = this;
+        dbHelper = new SQLiteDBFavHelper(this);
 
     }
     public static AppController obtainApp(Context context) {

@@ -1,6 +1,5 @@
 package com.aries.pi.utils;
 
-import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
@@ -14,20 +13,19 @@ public class SQLiteDBFavHelper
   private static final String DB_NAME = "product.db";
   private SQLiteDatabase db;
 
+
   public SQLiteDBFavHelper(AppController app)
   {
     if (app.dbHelper != null) {
       throw new RuntimeException("Duplicated db helper");
     }
-    db = app.openOrCreateDatabase(DB_NAME, Context.MODE_PRIVATE, null);
     this.db = app.openOrCreateDatabase("product.db", 0, null);
     app.dbHelper = this;
     createTableIfNotExist();
   }
-  
   private void createTableIfNotExist()
   {
-    String sql = "CREATE TABLE if NOT EXISTS \"product\" (\n\"id\"  TEXT PRIMARY KEY AUTOINCREMENT," +
+    String sql = "CREATE TABLE if NOT EXISTS \"product\" (\n\"id\"  TEXT PRIMARY KEY," +
             "\n\"nama_barang\"  TEXT NOT NULL," +
             "\n\"harga_barang\"  DOUBLE NOT NULL," +
             "\n\"ukuran_lensa\"  INTEGER NOT NULL," +

@@ -15,17 +15,17 @@ public class DAO_Product
   public static void addProd(Context ctx, String paramString1, String paramString2, Integer paramString3, String paramString4, String paramString5)
   {
     dbHelper = AppController.obtainApp(ctx).dbHelper;
-    dbHelper.execSQL("INSERT into product (id, nama_barang, harga_barang, ukurang_lensa, lensa) VALUES( ?,?,?,?,?);", new Object[]{ paramString1, paramString2, paramString3, paramString4, paramString5 });
+    dbHelper.execSQL("INSERT into product (id, nama_barang, harga_barang, ukuran_lensa, lensa) VALUES( ?,?,?,?,?);", new Object[]{ paramString1, paramString2, paramString3, paramString4, paramString5 });
   }
   
   public static void clearProd(Context paramContext)
-  {
+  { dbHelper = new SQLiteDBFavHelper(AppController.obtainApp(paramContext));
     dbHelper = AppController.obtainApp(paramContext).dbHelper;
    dbHelper.execSQL("delete from product", null);
   }
   
   public static void deleteProd(Context ctx, String paramString1, String paramString2, Integer paramString3, String paramString4, String paramString5)
-  {
+  { dbHelper = new SQLiteDBFavHelper(AppController.obtainApp(ctx));
     dbHelper = AppController.obtainApp(ctx).dbHelper;
 
     dbHelper.execSQL("delete from product where id = '" + paramString1 + "' and nama_barang = '" + paramString2 + "' and harga_barang = '" + paramString3 +  "' and ukuran_lensa = '" + paramString4 + "' and lensa = '" + paramString5 +"'", null);
@@ -33,6 +33,7 @@ public class DAO_Product
   
   public static ArrayList<FavBean> getProduct(Context ctx)
   {
+    dbHelper = new SQLiteDBFavHelper(AppController.obtainApp(ctx));
     dbHelper = AppController.obtainApp(ctx).dbHelper;
     Cursor cursor = dbHelper.rawQuery("select * from product", null);
     ArrayList<FavBean> favbeans = new ArrayList<>();
