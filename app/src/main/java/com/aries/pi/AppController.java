@@ -6,7 +6,6 @@ import android.app.Application;
 import android.content.Context;
 import android.os.Process;
 
-import com.aries.pi.utils.SQLiteDBFavHelper;
 
 import java.util.LinkedList;
 
@@ -34,14 +33,13 @@ public class AppController extends Application {
 
     public int currentThemeId = R.style.AppTheme;
 
-    public SQLiteDBFavHelper dbHelper;
     private AppController mInstance;
 
     @Override
     public void onCreate() {
         super.onCreate();
         mInstance = this;
-        dbHelper = new SQLiteDBFavHelper(this);
+
 
     }
     public static AppController obtainApp(Context context) {

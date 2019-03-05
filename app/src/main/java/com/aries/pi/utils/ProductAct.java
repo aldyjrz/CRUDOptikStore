@@ -10,7 +10,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
@@ -31,6 +30,7 @@ public class ProductAct
   private Integer ukuran_lensa;
   private String lensa;
   private SharedPreferences prefs;
+  private SQLiteHandler SQLiteHandler;
 
 
   protected void onCreate(Bundle paramBundle)
@@ -39,20 +39,7 @@ public class ProductAct
     setContentView(R.layout.add_product);
     this.app = AppController.obtainApp(this);
     this.app.addActivity(this);
-    setListAdapter(new ProductAdapter(this,
-            DAO_Product.getProduct(this)));
-    getListView().setOnItemClickListener(new AdapterView.OnItemClickListener() {
-      @Override
-      public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        FavBean history = (FavBean) parent.getAdapter().getItem(position);
-        app.id = String.valueOf(history.id);
-        app.nama_barang = history.nama_barang;
-        app.harga_barang = history.harga_barang;
-        app.ukuran_lensa = history.ukuran_lensa;
-        app.lensa = history.lensa;
 
-      }
-    });
   }
 
   public boolean onCreateOptionsMenu(Menu menu)
@@ -72,7 +59,7 @@ public class ProductAct
   public boolean onOptionsItemSelected(MenuItem item) {
     switch (item.getItemId()) {
       case R.id.navigation_home:
-       startActivity(new Intent(getApplicationContext(), MainActivity.class));
+        startActivity(new Intent(getApplicationContext(), MainActivity.class));
         break;
       case R.id.navigation_about:
         startActivity(new Intent(this, AboutActivity.class));
@@ -125,7 +112,7 @@ public class ProductAct
         holder = (ViewHolder) convertView.getTag();
       }
       FavBean history = favBeans.get(position);
-      holder.tv_id.setText(history.id);
+      holder.tv_id.setText(history.ids);
       holder.tv_namabarang.setText(history.nama_barang);
       holder.tv_hargabarang.setText(String.valueOf(history.harga_barang));
       holder.tv_ukuranlensa.setText(history.ukuran_lensa);

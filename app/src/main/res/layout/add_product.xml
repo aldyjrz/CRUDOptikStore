@@ -41,27 +41,43 @@
             android:inputType="text" />
 
         <EditText
-            android:id="@+id/hargabarang"
+            android:id="@+id/harga_kiri"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
             android:layout_marginTop="15dp"
-            android:hint="@string/str_harga"
-            android:inputType="numberDecimal"
-            />
+            android:layout_marginRight="20dp"
+            android:hint="Harga Lensa Kiri" />
+
+        <EditText
+            android:id="@+id/harga_kanan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="20dp"
+            android:hint="Harga Lensa Kanan" />
 
 
         <EditText
-        android:id="@+id/ukuran"
+        android:id="@+id/ukuran_kiri"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="15dp"
         android:hint="@string/ukuran"
-        android:inputType="numberDecimal"
         />
+
+        <EditText
+            android:id="@+id/ukuran_kanan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="15dp"
+            android:hint="@string/ukuran"
+            />
 
         <EditText
             android:id="@+id/lens"
@@ -70,7 +86,16 @@
             android:layout_marginLeft="20dp"
             android:layout_marginTop="15dp"
             android:layout_marginRight="20dp"
-            android:hint="@string/lens" />
+            android:hint="Lensa Kiri " />
+
+        <EditText
+            android:id="@+id/lens2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="20dp"
+            android:hint="Lensa Kanan" />
 
         <Button
 

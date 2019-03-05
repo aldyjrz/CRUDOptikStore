@@ -16,19 +16,22 @@ public class ProductAdd
 {
   AppController app;
 
-  EditText id, nama, harga, ukuran, mins;
+  EditText id, nama, harga_kiri, harga_kanan, ukuran_kiri, ukuran_kanan, mins;
   Button save;
-  private DAO_Product db;
+  private SQLiteHandler db;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
 
     setContentView(R.layout.add_product);
+    db = new SQLiteHandler(getApplicationContext());
     id = findViewById(R.id.idbarang);
     nama = findViewById(R.id.namabarang);
-    harga = findViewById(R.id.hargabarang);
-    ukuran = findViewById(R.id.ukuran);
+    harga_kiri = findViewById(R.id.harga_kiri);
+    harga_kanan = findViewById(R.id.harga_kanan);
+    ukuran_kanan = findViewById(R.id.ukuran_kanan);
+    ukuran_kiri = findViewById(R.id.ukuran_kiri);
     mins = findViewById(R.id.lens);
     save = findViewById(R.id.btn_simpan);
 
@@ -37,18 +40,24 @@ public class ProductAdd
       public void onClick(View v) {
         final String ids;
         final String namas;
-        final Integer hargas;
-        final String ukurans;
+        final String hargas_kiris;
+        final String harga_kanans;
+        final String ukuran_kiris;
+        final String ukuran_kanans;
         final String minss;
         ids = id.getText().toString();
         namas = nama.getText().toString();
-        hargas = Integer.parseInt(harga.getText().toString());
-        ukurans = ukuran.getText().toString();
+        ukuran_kiris = ukuran_kiri.getText().toString();
+        ukuran_kanans = ukuran_kanan.getText().toString();
+        hargas_kiris = harga_kiri.getText().toString();
+        harga_kanans = harga_kanan.getText().toString();
         minss = mins.getText().toString();
 
         if(!ids.isEmpty() && !namas.isEmpty() &&  !minss.isEmpty()) {
-               DAO_Product.addProd(getApplicationContext(), ids, namas, hargas, ukurans, minss);
-        }else  if(ids.isEmpty() && namas.isEmpty() && minss.isEmpty() && hargas == 0 && ukurans.isEmpty()) {
+          db.addProd(id.getText().toString(), namas, harga_kanans, hargas_kiris, ukuran_kanans, ukuran_kiris, minss);
+
+
+        }else  if(ids.isEmpty() && namas.isEmpty() && minss.isEmpty() && harga_kanans.isEmpty() && ukuran_kanans.isEmpty()) {
           Toast.makeText(getApplicationContext(), "Harap isi semua field", Toast.LENGTH_SHORT).show();
         }
       }

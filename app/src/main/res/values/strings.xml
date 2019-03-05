@@ -4,9 +4,9 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="title_about">About</string>
-    <string name="cart">Cart</string>
+    <string name="cart">Keranjang</string>
     <string name="checkout">Checkout</string>
-    <string name="add_to_cart">Add To Cart</string>
+    <string name="add_to_cart">Tambah Keranjang</string>
     <string name="search_id">Cari</string>
     <string name="str_hint_search">Cari ID Product</string>
 

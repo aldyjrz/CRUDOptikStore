@@ -1,7 +1,6 @@
 package com.aries.pi.activity;
 
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -16,9 +15,8 @@ import android.widget.Toast;
 import com.aries.pi.AppController;
 import com.aries.pi.R;
 import com.aries.pi.SessionUser;
-import com.aries.pi.utils.DAO_Product;
 import com.aries.pi.utils.ProductAdd;
-import com.aries.pi.utils.SQLiteDBFavHelper;
+import com.aries.pi.utils.SQLiteHandler;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -41,13 +39,12 @@ public class MainActivity extends AppCompatActivity {
         }
     };
     private AppController app;
-    private SQLiteDBFavHelper dbFavHelper;
-    private String idx, namax, lensax;
-    private Integer hargax;
-    String ukuranx;
-    private DAO_Product db;
 
+    private String idx, namax, lensax;
+    private String hargax;
+    String ukuranx;
     Button addcart,cart, btn_cari;
+    private EditText et_cari;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         if(user.isLoggedIn()){
             startActivity(new Intent(getApplicationContext(), LoginActivity.class));
         }else {
-             EditText et_cari = (EditText)findViewById(R.id.et_cari);
+            et_cari = (EditText)findViewById(R.id.et_cari);
             btn_cari = (Button) findViewById(R.id.cari);
             cart = (Button)findViewById(R.id.btn_add);
              final TextView id, nama, harga, ukuran, lensa;
@@ -85,40 +82,23 @@ public class MainActivity extends AppCompatActivity {
 
                 @Override
                 public void onClick(View v) {
-                    idx = id.getText().toString();
-                    namax = nama.getText().toString();
-                    hargax = Integer.valueOf(harga.getText().toString());
-                    ukuranx = ukuran.getText().toString();
-                    lensax = lensa.getText().toString();
-
+                   String idx = et_cari.getText().toString();
                     if(idx.isEmpty()){
                         Toast.makeText(getApplicationContext(), "ID Product Belum Di Isi", Toast.LENGTH_SHORT).show();
-                        return;
-                    }else{
+                    }else if(!idx.isEmpty()){
 
-                        SQLiteDBFavHelper dbFavHelper = new SQLiteDBFavHelper(app);
-                        Cursor res = dbFavHelper.rawQuery("select * from product", null);
-                        while (res.moveToNext()) {
-
-                            idx = res.getString(1);
-                            namax = res.getString(2);
-                            hargax = res.getInt(3);
-                            ukuranx = res.getString(4);
-                            lensax = res.getString(5);
-                            Toast.makeText(getApplicationContext(), idx, Toast.LENGTH_SHORT).show();
-
+                        namax = nama.getText().toString();
+                        hargax = harga.getText().toString();
+                        ukuranx = ukuran.getText().toString();
+                        lensax = lensa.getText().toString();
+                        namax = nama.getText().toString();
+                        hargax = harga.getText().toString();
+                        ukuranx = ukuran.getText().toString();
+                        lensax = lensa.getText().toString();
+                        SQLiteHandler db = new SQLiteHandler(getApplicationContext());
+                        db.getProductDetail();
                         }
-                    }
-                    addcart.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
 
-                            if(idx.isEmpty()){
-                                Toast.makeText(getApplicationContext(), "Barang Kosong", Toast.LENGTH_SHORT).show();
-                            }
-                            DAO_Product.addProd(getApplicationContext(), idx, namax, hargax, ukuranx, lensax);
-                        }
-                    });
                 }
 
             });

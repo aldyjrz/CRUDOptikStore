@@ -3,7 +3,7 @@ package com.aries.pi.utils;
 public class FavBean
 {
 
-  public String id;
+  public String ids;
   public String nama_barang;
   public Double harga_barang;
   public String ukuran_lensa;
